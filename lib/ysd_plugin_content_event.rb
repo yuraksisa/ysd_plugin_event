@@ -1,4 +1,0 @@
-require 'ysd_plugin_content_event_model'
-require 'ysd_plugin_content_event_extension'
-require 'ysd_plugin_content_event_middleware'
-require 'ysd_plugin_content_event_init'

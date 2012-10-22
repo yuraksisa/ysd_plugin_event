@@ -1,0 +1,14 @@
+        <div id="event_form">
+          <div class="formrow">
+        	 <label for="event_date_start" class="fieldtitle">Start date</label> 
+		     <input type="text" name="event_date_start" id="event_date_start" class="fieldcontrol date_control" size="10" maxlength="10" <%% if (entity) { %> value="<%%= entity.event_date_start %>" <%% } %>/>
+		     <label for="event_time_start" class="fieldtitle" >Time</label>
+             <select name="event_time_start" id="event_time_start" class="fieldcontrol time_control"/>
+          </div>
+          <div class="formrow">
+        	 <label for="event_date_end" class="fieldtitle">End date</label> 
+		     <input type="text" name="event_date_end" id="event_date_end" class="fieldcontrol date_control" size="10" maxlength="10" <%% if (entity) { %> value="<%%= entity.event_date_end %>" <%% } %>/>
+		     <label for="timefrom" class="fieldtitle">Time</label>
+             <select name="event_time_end" id="event_time_end" class="fieldcontrol time_control"/>
+          </div>
+        </div>                

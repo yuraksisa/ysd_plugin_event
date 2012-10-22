@@ -1,3 +1,6 @@
-content:
-  content_event:
-    description: Event
+aspect:
+  event: Evento
+event:
+  description: Date
+  starts_at: Starts 
+  ends_at: Ends
