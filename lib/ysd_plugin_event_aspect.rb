@@ -1,3 +1,5 @@
+require 'renders/ysd_ui_fieldset_render' unless defined?UI::FieldSetRender
+
 module Huasi
   #
   # Event aspect
@@ -15,7 +17,7 @@ module Huasi
     
       app = context[:app]
       
-      renderer = UI::FieldSetRender.new('event', app)
+      renderer = ::UI::FieldSetRender.new('event', app)
       renderer.render('view','',{:element => element})
     
     end    
@@ -46,7 +48,7 @@ module Huasi
       
       app = context[:app]
       
-      renderer = UI::FieldSetRender.new('event', app)      
+      renderer = ::UI::FieldSetRender.new('event', app)      
       contact_form = renderer.render('form', 'em')    
       
     end
@@ -58,7 +60,7 @@ module Huasi
     
       app = context[:app]
 
-      renderer = UI::FieldSetRender.new('event', app)      
+      renderer = ::UI::FieldSetRender.new('event', app)      
       photo_form_extension = renderer.render('formextension', 'em')
         
               
@@ -80,7 +82,7 @@ module Huasi
     
        app = context[:app]
     
-       renderer = UI::FieldSetRender.new('event', app)      
+       renderer = ::UI::FieldSetRender.new('event', app)      
        contact_template = renderer.render('view', 'em')
                 
     end
