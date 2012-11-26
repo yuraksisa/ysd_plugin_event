@@ -1,6 +1,6 @@
 aspect:
   event: Event
 event:
-  description: Data
+  description: Quan
   starts_at: Comença
   ends_at: Finalitza

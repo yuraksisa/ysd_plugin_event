@@ -2,11 +2,11 @@
   <div class="content_data_block">
     <h3 class="content_data_block_title"><%= t.event.description %></h3>
     <div class="content_data_row">
-      <span><%= t.event.starts_at %>&nbsp;</span><span><%= "#{element.event_date_start.strftime('%d.%m.%y')} #{element.event_time_start}" unless element.event_date_start.nil?%>
+      <span><%= t.event.starts_at %>&nbsp;</span><span><%= "#{element.event_date_start.getlocal(element.event_time_zone).strftime('%d.%m.%y %H.%M %z')}" unless element.event_date_start.nil?%>
     </div>
     <% if element.event_date_end.to_s.strip.length >= 0 %>
     <div class="content_data_row">
-      <span><%= t.event.ends_at %>&nbsp;</span><span><%= "#{element.event_date_end.strftime('%d.%m.%y')} #{element.event_time_end}" unless element.event_date_end.nil?%>
+      <span><%= t.event.ends_at %>&nbsp;</span><span><%= "#{element.event_date_end.getlocal(element.event_time_zone).strftime('%d.%m.%y %H.%M %z')}" unless element.event_date_end.nil?%>
     </div>
     <% end %>
   </div>

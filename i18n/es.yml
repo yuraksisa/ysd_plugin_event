@@ -1,6 +1,6 @@
 aspect:
   event: Evento
 event:
-  description: Fecha
+  description: Cuando
   starts_at: Empieza
   ends_at: Termina

@@ -1,7 +1,7 @@
 <script type="text/javascript">
 
-require(['jquery', 'YSDEntityManagementComplementHooks', 'YSDMemoryDataSource', 'YSDSelectSelector', 'jquery.ui' ],
-        function($, EntityManagementComplementHooks, MemoryDataSource, SelectSelector ) {
+require(['jquery', 'YSDEntityManagementComplementHooks', 'YSDMemoryDataSource', 'YSDSelectSelector', 'YSDDateFormatter', 'jquery.ui', 'jquery.ui.timepicker' ],
+        function($, EntityManagementComplementHooks, MemoryDataSource, SelectSelector, DateFormatter ) {
 
           EventPlugin = function() {
           	
@@ -19,8 +19,9 @@ require(['jquery', 'YSDEntityManagementComplementHooks', 'YSDMemoryDataSource', 
             
             this.adaptFormData = function(data) {
             	
-              data.event_date_start = $('#event_date_start').datepicker("getDate");
-              data.event_date_end = $('#event_date_end').datepicker("getDate");
+              data.event_date_start = DateFormatter.formatISODate($('#event_date_start').datetimepicker("getDate"));
+              data.event_date_end = DateFormatter.formatISODate($('#event_date_end').datetimepicker("getDate"));
+              data.event_time_zone = DateFormatter.extractTimeZone($('#event_date_start').datetimepicker("getDate"));
             	
               return data;	
             	
@@ -31,59 +32,38 @@ require(['jquery', 'YSDEntityManagementComplementHooks', 'YSDMemoryDataSource', 
             this.configureForm = function(entity) { /* Configure the events */
             
               var self = this;
+              
+              var minDateStart = new Date();
+              minDateStart.clearTime();
+              
+              if (entity && entity.event_date_start) {
+                minDateStart = new Date(entity.event_date_start.getFullYear(), entity.event_date_start.getMonth(), entity.event_date_start.getDate(), 0, 0, 0);
+              }
             
-              $('#event_date_start').datepicker({numberOfMonths:2, minDate: new Date(), dateFormat: 'dd/mm/yy'}, '<%= session[:locale] %>');
+              $('#event_date_start').datetimepicker({controlType: 'select', showTimezone: true, useLocalTimezone: true, numberOfMonths:2, minDate: minDateStart, dateFormat: 'dd/mm/yy'}, '<%= session[:locale] %>');
               
               if (entity != null) {
-                $('#event_date_start').datepicker('setDate', entity.event_date_start); 
+                $('#event_date_start').datetimepicker('setDate', entity.event_date_start); 
               }
               else {
-                $('#event_date_start').datepicker('setDate', '+0');
+                $('#event_date_start').datetimepicker('setDate', '+0');
+              }
+              
+              var minDateEnd = new Date();
+              minDateEnd.clearTime();
+              if (entity && entity.event_date_end) {
+                minDateEnd = new Date(entity.event_date_end.getFullYear(), entity.event_date_end.getMonth(), entity.event_date_end.getDate(), 0, 0, 0);
               }
 
-              $('#event_date_end').datepicker({numberOfMonths:2, minDate:new Date(), dateFormat: 'dd/mm/yy'}, '<%= session[:locale] %>');
+              $('#event_date_end').datetimepicker({controlType: 'select', showTimezone: true, useLocalTimezone: true, numberOfMonths:2, minDate: minDateEnd, dateFormat: 'dd/mm/yy'}, '<%= session[:locale] %>');
               
               if (entity != null) {
-                $('#event_date_end').datepicker('setDate', entity.event_date_end);
+                $('#event_date_end').datetimepicker('setDate', entity.event_date_end);
               }
               else {
-                $('#event_date_end').datepicker('setDate', '+0');
+                $('#event_date_end').datetimepicker('setDate', '+0');
               }
-                
-              // Configure times
-              var times = ["07:00","07:15","07:30","07:45",
-                           "08:00","08:15","08:30","08:45",
-                           "09:00","09:15","09:30","09:45",
-                           "10:00","10:15","10:30","10:45",
-                           "11:00","11:15","11:30","11:45",
-                           "12:00","12:15","12:30","12:45", 
-                           "13:00","13:15","13:30","13:45",
-                           "14:00","14:15","14:30","14:45",
-                           "15:00","15:15","15:30","15:45",
-                           "16:00","16:15","16:30","16:45",
-                           "17:00","17:15","17:30","17:45",
-                           "18:00","18:15","18:30","18:45",   
-                           "19:00","19:15","19:30","19:45",
-                           "20:00","20:15","20:30","20:45",
-                           "21:00","21:15","21:30","21:45",
-                           "22:00","22:15","22:30","22:45",
-                           "23:00","23:15","23:30","23:45",
-                           "00:00","00:15","00:30","00:45", 
-                           "01:00","01:15","01:30","01:45",
-                           "02:00","02:15","02:30","02:45",
-                           "03:00","03:15","03:30","03:45",
-                           "04:00","04:15","04:30","04:45",
-                           "05:00","05:15","05:30","05:45",
-                           "06:00","06:15","06:30","06:45",                                                                                
-                           ];
-              var timesDataSource = new MemoryDataSource(times);
-         
-              var timeStartValue  = (entity && entity.event_time_start)?entity.event_time_start:"07:00";
-              var selectTimeStart = new SelectSelector('event_time_start', timesDataSource, timeStartValue);
               
-              var timeEndValue  = (entity && entity.event_time_end)?entity.event_time_end:"07:00";
-              var selectTimeEnd = new SelectSelector('event_time_end', timesDataSource, timeEndValue);
-
               
             };
           };

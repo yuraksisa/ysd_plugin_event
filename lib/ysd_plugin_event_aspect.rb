@@ -1,4 +1,4 @@
-require 'renders/ysd_ui_fieldset_render' unless defined?UI::FieldSetRender
+require 'ui/ysd_ui_fieldset_render' unless defined?UI::FieldSetRender
 
 module Huasi
   #
@@ -29,7 +29,7 @@ module Huasi
     #
     def element_info(context={})
       app = context[:app]
-      {:id => 'event', :description => "#{app.t.aspect.event}"} 
+      {:id => 'event', :description => "#{app.t.event.description}"} 
     end
 
     #

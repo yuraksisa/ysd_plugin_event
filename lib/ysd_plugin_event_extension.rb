@@ -1,4 +1,5 @@
 require 'ysd-plugins_viewlistener' unless defined?Plugins::ViewListener
+require 'ysd_md_fieldset_event'
 
 #
 # Event aspect Extension
@@ -20,7 +21,7 @@ module Huasi
       app = context[:app]
       
       aspects = []
-      aspects << ::Plugins::Aspect.new(:event, app.t.aspect.event, [:entity], EventAspectDelegate.new)
+      aspects << ::Plugins::Aspect.new(:event, app.t.aspect.event, FieldSet::Event, EventAspectDelegate.new)
                                                
       return aspects
        
