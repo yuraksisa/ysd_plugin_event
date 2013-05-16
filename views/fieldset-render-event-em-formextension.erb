@@ -42,10 +42,10 @@ require(['jquery', 'YSDEntityManagementComplementHooks', 'YSDMemoryDataSource', 
             
               $('#event_date_start').datetimepicker(
                  {controlType: 'select', showTimezone: true, useLocalTimezone: true, numberOfMonths:2, 
-                  minDate: minDateStart, dateFormat: 'dd/mm/yy', timeFormat: 'HH:mm'},
+                  minDate: minDateStart, dateFormat: 'dd/mm/yy'},
                   '<%= session[:locale] %>');
               
-              if (entity != null) {
+              if (entity != null && entity.event_date_start) {
                 entity.event_date_start.setHours(entity.event_date_start.getHours() + parseInt(entity.event_time_zone));
                 $('#event_date_start').datetimepicker('setDate', entity.event_date_start); 
               }
@@ -63,7 +63,7 @@ require(['jquery', 'YSDEntityManagementComplementHooks', 'YSDMemoryDataSource', 
                  minDate: minDateEnd, dateFormat: 'dd/mm/yy'}, 
                  '<%= session[:locale] %>');
               
-              if (entity != null) {
+              if (entity != null && entity.event_date_end) {
                 entity.event_date_end.setHours(entity.event_date_end.getHours() + parseInt(entity.event_time_zone));
                 $('#event_date_end').datetimepicker('setDate', entity.event_date_end);
               }
