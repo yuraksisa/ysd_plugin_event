@@ -1,4 +1,6 @@
 require 'ysd_plugin_event_aspect'
 require 'ysd_plugin_event_extension'
+require 'sinatra/yito_extension/ysd_sinatra_events'
+require 'sinatra/yito_extension/ysd_sinatra_events_rest_api'
 require 'ysd_plugin_event_middleware'
 require 'ysd_plugin_event_init'
