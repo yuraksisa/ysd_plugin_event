@@ -8,7 +8,5 @@ Plugins::SinatraAppPlugin.register :event do
    version=     '0.1'
    hooker       Huasi::EventExtension
    sinatra_extension Sinatra::Event
-   sinatra_extension Sinatra::YitoExtension::Events 
-   sinatra_extension Sinatra::YitoExtension::EventsRESTApi
 end
 
